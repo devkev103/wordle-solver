@@ -1,0 +1,5 @@
+.vs/*
+WordleSolver/bin/*
+WordleSolver/obj/*
+WordleSolver.Tests/bin/*
+WordleSolver.Tests/obj/*
