@@ -27,11 +27,18 @@
             get => rule;
         }
 
-        public Rules(string letter, int position, Rule rule)
+        private string word;
+        public string Word
+        {
+            get => word;
+        }
+
+        public Rules(string letter, int position, Rule rule, string word)
         {
             this.letter = letter;
             this.position = position;
             this.rule = rule;
+            this.word = word;
         }
     }
 }

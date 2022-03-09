@@ -62,12 +62,12 @@ namespace WordleSolver
                 }
 
                 // convert shorthand to full word
-                if (input == "c") { input = "corrrect"; }
+                if (input == "c") { input = "correct"; }
                 else if (input == "a") { input = "absent"; }
                 else if (input == "p") { input = "present"; }
 
                 var isEnumParsed = Enum.TryParse(input, true, out Rule parsedEnumValue);
-                solver.AddRule(new Rules(inputword.Substring(i, 1), i, parsedEnumValue));
+                solver.AddRule(new Rules(inputword.Substring(i, 1), i, parsedEnumValue, inputword));
             }
             solver.ApplyRules();
             Console.WriteLine("");
