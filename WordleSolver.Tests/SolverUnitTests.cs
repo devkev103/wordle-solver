@@ -83,7 +83,7 @@ namespace UnitTests.WordleSolver
             // dodge should not exist in list -- optimization
             Assert.IsFalse(_solver.Dictionary.Exists(e => e.StartsWith(key)), $"'{key}' does exist in dictionary.");
         }
-        /*
+
         [Test]
         public void ApplyingRules_ForChoke_ReturnTrue()
         {
@@ -91,18 +91,22 @@ namespace UnitTests.WordleSolver
             var key = "choke";
 
             // adding alert
-            _solver.AddRule(new Rules("a", 0, Rule.Absent, "alert"));
-            _solver.AddRule(new Rules("l", 1, Rule.Absent, "alert"));
-            _solver.AddRule(new Rules("e", 2, Rule.Present, "alert"));
-            _solver.AddRule(new Rules("r", 3, Rule.Absent, "alert"));
-            _solver.AddRule(new Rules("t", 4, Rule.Absent, "alert"));
+            var word1 = new Words("alert");
+            word1.AddRule(new Rules("a", 0, Rule.Absent));
+            word1.AddRule(new Rules("l", 1, Rule.Absent));
+            word1.AddRule(new Rules("e", 2, Rule.Present));
+            word1.AddRule(new Rules("r", 3, Rule.Absent));
+            word1.AddRule(new Rules("t", 4, Rule.Absent));
+            _solver.AddWord(word1);
 
             // adding snide
-            _solver.AddRule(new Rules("s", 0, Rule.Absent, "snide"));
-            _solver.AddRule(new Rules("n", 1, Rule.Absent, "snide"));
-            _solver.AddRule(new Rules("i", 2, Rule.Absent, "snide"));
-            _solver.AddRule(new Rules("d", 3, Rule.Absent, "snide"));
-            _solver.AddRule(new Rules("e", 4, Rule.Correct, "snide"));
+            var word2 = new Words("snide");
+            word2.AddRule(new Rules("s", 0, Rule.Absent));
+            word2.AddRule(new Rules("n", 1, Rule.Absent));
+            word2.AddRule(new Rules("i", 2, Rule.Absent));
+            word2.AddRule(new Rules("d", 3, Rule.Absent));
+            word2.AddRule(new Rules("e", 4, Rule.Correct));
+            _solver.AddWord(word2);
 
             _solver.ApplyRules();
 
@@ -116,12 +120,14 @@ namespace UnitTests.WordleSolver
             // KEY: CHOKE #254 -- ERODE rule
             var key = "choke";
 
-            // adding choke
-            _solver.AddRule(new Rules("e", 0, Rule.Absent, "choke"));
-            _solver.AddRule(new Rules("r", 1, Rule.Absent, "choke"));
-            _solver.AddRule(new Rules("o", 2, Rule.Correct, "choke"));
-            _solver.AddRule(new Rules("d", 3, Rule.Absent, "choke"));
-            _solver.AddRule(new Rules("e", 4, Rule.Correct, "choke"));
+            // adding erode
+            var word1 = new Words("erode");
+            word1.AddRule(new Rules("e", 0, Rule.Absent));
+            word1.AddRule(new Rules("r", 1, Rule.Absent));
+            word1.AddRule(new Rules("o", 2, Rule.Correct));
+            word1.AddRule(new Rules("d", 3, Rule.Absent));
+            word1.AddRule(new Rules("e", 4, Rule.Correct));
+            _solver.AddWord(word1);
 
             _solver.ApplyRules();
 
@@ -135,18 +141,22 @@ namespace UnitTests.WordleSolver
             var key = "sweet";
 
             // adding melee
-            _solver.AddRule(new Rules("m", 0, Rule.Absent, "melee"));
-            _solver.AddRule(new Rules("e", 1, Rule.Present, "melee"));
-            _solver.AddRule(new Rules("l", 2, Rule.Absent, "melee"));
-            _solver.AddRule(new Rules("e", 3, Rule.Correct, "melee"));
-            _solver.AddRule(new Rules("e", 4, Rule.Absent, "melee"));
+            var word1 = new Words("melee");
+            word1.AddRule(new Rules("m", 0, Rule.Absent));
+            word1.AddRule(new Rules("e", 1, Rule.Present));
+            word1.AddRule(new Rules("l", 2, Rule.Absent));
+            word1.AddRule(new Rules("e", 3, Rule.Correct));
+            word1.AddRule(new Rules("e", 4, Rule.Absent));
+            _solver.AddWord(word1);
 
             // adding steed
-            _solver.AddRule(new Rules("s", 0, Rule.Correct, "steed"));
-            _solver.AddRule(new Rules("t", 1, Rule.Present, "steed"));
-            _solver.AddRule(new Rules("e", 2, Rule.Correct, "steed"));
-            _solver.AddRule(new Rules("e", 3, Rule.Correct, "steed"));
-            _solver.AddRule(new Rules("d", 4, Rule.Absent, "steed"));
+            var word2 = new Words("steed");
+            word2.AddRule(new Rules("s", 0, Rule.Correct));
+            word2.AddRule(new Rules("t", 1, Rule.Present));
+            word2.AddRule(new Rules("e", 2, Rule.Correct));
+            word2.AddRule(new Rules("e", 3, Rule.Correct));
+            word2.AddRule(new Rules("d", 4, Rule.Absent));
+            _solver.AddWord(word2);
 
             _solver.ApplyRules();
 
@@ -159,18 +169,20 @@ namespace UnitTests.WordleSolver
             // KEY: MELEE #??? -- Triple Letter PresentCorrect rule
             var key = "melee";
 
-            // adding melee
-            _solver.AddRule(new Rules("g", 0, Rule.Absent, "geese"));
-            _solver.AddRule(new Rules("e", 1, Rule.Correct, "geese"));
-            _solver.AddRule(new Rules("e", 2, Rule.Present, "geese"));
-            _solver.AddRule(new Rules("s", 3, Rule.Absent, "geese"));
-            _solver.AddRule(new Rules("e", 4, Rule.Correct, "geese"));
+            // adding geese
+            var word1 = new Words("geese");
+            word1.AddRule(new Rules("g", 0, Rule.Absent));
+            word1.AddRule(new Rules("e", 1, Rule.Correct));
+            word1.AddRule(new Rules("e", 2, Rule.Present));
+            word1.AddRule(new Rules("s", 3, Rule.Absent));
+            word1.AddRule(new Rules("e", 4, Rule.Correct));
+            _solver.AddWord(word1);
 
             _solver.ApplyRules();
 
             Assert.IsTrue(_solver.Dictionary.Exists(e => e.StartsWith(key)), $"'{key}' does not exist in dictionary.");
         }
-
+        
         [Test]
         public void ApplyingRules_ForSweet2_ReturnTrue()
         {
@@ -178,38 +190,46 @@ namespace UnitTests.WordleSolver
             var key = "sweet";
 
             // adding erode
-            _solver.AddRule(new Rules("e", 0, Rule.Present, "erode"));
-            _solver.AddRule(new Rules("r", 1, Rule.Absent, "erode"));
-            _solver.AddRule(new Rules("o", 2, Rule.Absent, "erode"));
-            _solver.AddRule(new Rules("d", 3, Rule.Absent, "erode"));
-            _solver.AddRule(new Rules("e", 4, Rule.Present, "erode"));
+            var word1 = new Words("erode");
+            word1.AddRule(new Rules("e", 0, Rule.Present));
+            word1.AddRule(new Rules("r", 1, Rule.Absent));
+            word1.AddRule(new Rules("o", 2, Rule.Absent));
+            word1.AddRule(new Rules("d", 3, Rule.Absent));
+            word1.AddRule(new Rules("e", 4, Rule.Present));
+            _solver.AddWord(word1);
 
             // adding level
-            _solver.AddRule(new Rules("l", 0, Rule.Absent, "level"));
-            _solver.AddRule(new Rules("e", 1, Rule.Present, "level"));
-            _solver.AddRule(new Rules("v", 2, Rule.Absent, "level"));
-            _solver.AddRule(new Rules("e", 3, Rule.Correct, "level"));
-            _solver.AddRule(new Rules("l", 4, Rule.Absent, "level"));
+            var word2 = new Words("level");
+            word2.AddRule(new Rules("l", 0, Rule.Absent));
+            word2.AddRule(new Rules("e", 1, Rule.Present));
+            word2.AddRule(new Rules("v", 2, Rule.Absent));
+            word2.AddRule(new Rules("e", 3, Rule.Correct));
+            word2.AddRule(new Rules("l", 4, Rule.Absent));
+            _solver.AddWord(word2);
 
             // adding melee
-            _solver.AddRule(new Rules("m", 0, Rule.Absent, "melee"));
-            _solver.AddRule(new Rules("e", 1, Rule.Present, "melee"));
-            _solver.AddRule(new Rules("l", 2, Rule.Absent, "melee"));
-            _solver.AddRule(new Rules("e", 3, Rule.Correct, "melee"));
-            _solver.AddRule(new Rules("e", 4, Rule.Absent, "melee"));
+            var word3 = new Words("melee");
+            word3.AddRule(new Rules("m", 0, Rule.Absent));
+            word3.AddRule(new Rules("e", 1, Rule.Present));
+            word3.AddRule(new Rules("l", 2, Rule.Absent));
+            word3.AddRule(new Rules("e", 3, Rule.Correct));
+            word3.AddRule(new Rules("e", 4, Rule.Absent));
+            _solver.AddWord(word3);
 
             // adding tweet
-            _solver.AddRule(new Rules("t", 0, Rule.Absent, "tweet"));
-            _solver.AddRule(new Rules("w", 1, Rule.Correct, "tweet"));
-            _solver.AddRule(new Rules("e", 2, Rule.Correct, "tweet"));
-            _solver.AddRule(new Rules("e", 3, Rule.Correct, "tweet"));
-            _solver.AddRule(new Rules("t", 4, Rule.Correct, "tweet"));
+            var word4 = new Words("tweet");
+            word4.AddRule(new Rules("t", 0, Rule.Absent));
+            word4.AddRule(new Rules("w", 1, Rule.Correct));
+            word4.AddRule(new Rules("e", 2, Rule.Correct));
+            word4.AddRule(new Rules("e", 3, Rule.Correct));
+            word4.AddRule(new Rules("t", 4, Rule.Correct));
+            _solver.AddWord(word4);
 
             _solver.ApplyRules();
 
             Assert.IsTrue(_solver.Dictionary.Exists(e => e.StartsWith(key)), $"'{key}' does not exist in dictionary.");
         }
-        */
+        
         [Test]
         public void ApplyingRules_ForSweetSameWordTwice_ReturnTrue()
         {
@@ -217,7 +237,7 @@ namespace UnitTests.WordleSolver
             var key = "sweet";
 
             // adding erode - twice
-            var word1 = new Words("later");
+            var word1 = new Words("erode");
             word1.AddRule(new Rules("e", 0, Rule.Present));
             word1.AddRule(new Rules("r", 1, Rule.Absent));
             word1.AddRule(new Rules("o", 2, Rule.Absent));
@@ -246,6 +266,35 @@ namespace UnitTests.WordleSolver
             word1.AddRule(new Rules("r", 4, Rule.Absent));
             _solver.AddWord(word1);
             _solver.AddWord(word1);
+
+            _solver.ApplyRules();
+
+            Assert.IsTrue(_solver.Dictionary.Exists(e => e.StartsWith(key)), $"'{key}' does not exist in dictionary.");
+        }
+
+        [Test]
+        public void ApplyingRules_ForVivid_ReturnTrue()
+        {
+            // KEY: VIVID #???
+            var key = "vivid";
+
+            // adding mouse
+            var word1 = new Words("mouse");
+            word1.AddRule(new Rules("m", 0, Rule.Absent));
+            word1.AddRule(new Rules("o", 1, Rule.Absent));
+            word1.AddRule(new Rules("u", 2, Rule.Absent));
+            word1.AddRule(new Rules("s", 3, Rule.Absent));
+            word1.AddRule(new Rules("e", 4, Rule.Absent));
+            _solver.AddWord(word1);
+
+            // adding naval
+            var word2 = new Words("naval");
+            word2.AddRule(new Rules("n", 0, Rule.Absent));
+            word2.AddRule(new Rules("a", 1, Rule.Absent));
+            word2.AddRule(new Rules("v", 2, Rule.Correct));
+            word2.AddRule(new Rules("a", 3, Rule.Absent));
+            word2.AddRule(new Rules("l", 4, Rule.Absent));
+            _solver.AddWord(word2);
 
             _solver.ApplyRules();
 
