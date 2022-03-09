@@ -45,6 +45,7 @@ namespace WordleSolver
             Console.Write("Type word you want to add: ");
             input = Console.ReadLine();
             inputword = input;
+            var word = new Words(inputword);
 
             Console.WriteLine("Foreach letter type correct, absent, or present. For shorthand: c, a, or p");
 
@@ -67,8 +68,10 @@ namespace WordleSolver
                 else if (input == "p") { input = "present"; }
 
                 var isEnumParsed = Enum.TryParse(input, true, out Rule parsedEnumValue);
-                solver.AddRule(new Rules(inputword.Substring(i, 1), i, parsedEnumValue, inputword));
+
+                word.AddRule(new Rules(inputword.Substring(i, 1), i, parsedEnumValue));
             }
+            solver.AddWord(word);
             solver.ApplyRules();
             Console.WriteLine("");
             Console.WriteLine($"After applying all rules here are the top five words out of {solver.Dictionary.Count} ... ");
