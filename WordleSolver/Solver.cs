@@ -25,16 +25,6 @@ namespace WordleSolver
             _words.Add(word);
         }
 
-        // move this do dictionary class?
-        public void PrintTop(int number)
-        {
-            int TopX = number < _dictionary.Count ? number : _dictionary.Count;
-            for (int i = 0; i < TopX; i++)
-            {
-                Console.WriteLine(_dictionary[i]);
-            }
-        }
-
         public void ApplyRules()
         {
             List<string> removals = new List<string>();
